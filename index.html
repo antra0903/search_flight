@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="mainApp.js"></script>
+    <script src="flightData.json"></script>
+    <script src="searcgSliderDirective.js"></script>
+    <script src="flightController.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="index.css">
+   
+    
+
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <header>
+        <h1>Flight Search Engine</h1>
+    </header>
+    
+    <div>
+        <div class="column-input-flight">
+            <div class="input-form">
+                <div class="navigation-bar">
+                    <ul>
+                        <li><a  ng-click="returnBooking()" ng-class="{'active': isActivereyurn}" href="#oneway">Return</a></li>
+                        <li><a  ng-click="returnOnewaybooking()" ng-class="{'active': isActiveoneway}">one Way</a></li>
+                   </ul>
+                </div>
+                <div class="display-form">
+                    <p class="display-error" ng-if="showError">Please provide required field</p>
+                    <input type="text" name="origincity" placeholder="Enter Origin City" ng-model="origincity" >
+                    <input type="text" name="destinationcity" placeholder="Enter Destination City" ng-model="destinationcity">
+                    <input type="text" name="startdate" placeholder="Departure Date" value=""  onfocus="(this.type='date')"  ng-model="startdate">
+                    <input type="text" name="enddate" placeholder="Return date"  onfocus="(this.type='date')" value="" ng-model="enddate" ng-disabled='disabletest' >
+                    <input type="number" name="passenger" placeholder="Passenger" ng-model="number">
+                    <button class="search-button" ng-click="searchFlight()">Search</button>
+                </div>
+                
+                <div class="redefine-search">
+                    <h3>Refine Flight search</h3>
+                    <div>
+                        <div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-filter">
+                    <slider-range min="0" max="10000" step="1000" value-min="search.amount_min" value-max="search.amount_max"></slider-range>
+            </div>
+            </div>
+        
+           <div class="column-display-flight">
+            <div class="search-breadcum" ng-if="showFlightDetails">
+                <div class="display-city">
+                    <p>
+                        <span class="city-selected">{{origincity}}</span><i class="fa fa-angle-right" style="font-size:22px"></i>
+                        <span class="city-selected">{{destinationcity}} </span><i class="fa fa-angle-right" style="font-size:22px"></i>
+                        <span class="city-selected">{{origincity}}</span>
+                    </p>
+
+                </div>
+                
+                <div class="display-date">
+                    <span class="close-button" ng-click ="closeModalBox()"> <i class="fa fa-close"></i></span>
+                    <p>{{startdate | date:'dd MMMM yyyy'}}</p>
+                    <p>{{enddate | date:'dd MMMM yyyy'}}</p>
+                </div>
+             </div>
+               
+            <div class="search-output">
+                <div class="display-filter-flight" ng-repeat="data in arrayOfObject">
+                    <div class="search-row">
+                        <div class="search-column-left">
+                            <p><b>Rs. {{data.price}}</b></p>
+                            <span class="block-element">{{data.name}}</span>
+                            <span class="block-element">Depart : {{data.departure}}</span>
+                            <span class="block-element">Arrived :{{data.arrival}}</span>
+                        </div>
+                        <div class="search-column-center">
+                            <br /><br /><br />
+                            <span class="block-element">{{data.name}}</span>
+                            <span class="block-element">Depart : {{data.departure}}</span>
+                            <span class="block-element">Arrived :{{data.arrival}}</span>
+                        </div>
+                        <div class="search-column-right">
+                            <span class="image-envelope"><i class="fa fa-envelope-o"></i></span>
+                            <button class ="booking-flight">Book Flight</button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+          </div>
+        </div>
+     </body>
+</html>

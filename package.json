@@ -1,0 +1,19 @@
+{
+  "name": "searchflight",
+  "version": "1.0.0",
+  "description": "",
+  "main": "appmodule.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --hot"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "devDependencies": {
+    "webpack": "^2.1.0-beta.8"
+  }
+}
